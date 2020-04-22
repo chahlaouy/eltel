@@ -1,0 +1,45 @@
+<div class="container py-3 gray-700">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="gray-700">
+
+           <i class="fas fa-phone-volume"></i> +339 745 964 30 - <i class="fas fa-phone-volume"></i> +336 056 723 37
+        </div>
+        <div>
+            {% if not app.user %}
+            
+                <button class="btn rounded bg-orange-400 gray-100">
+                    <a href="{{path('register')}}" class="nourane"> ouvrir un compte</a>
+                   
+                </button>
+                <button class="btn rounded bg-blue-400 gray-100">
+                    <a href="{{path('login')}}" class="nourane">connexion</a>
+                </button>
+            {% else %}
+                <div class="dropdown">
+                    <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h6 class="m-0 p-0 mr-1 gray-700">{{app.user.username}}</h6>
+                            </div>
+                            <div>
+                                <i class="far fa-caret-square-down gray-700"></i>
+                            </div>    
+                        </div>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{path('home')}}">Acceuil</a>
+
+                        {% if app.user.roles[0] == "ROLE_USER" %}
+                            <a class="dropdown-item" href="{{path('profile')}}">Profile</a>
+
+                        {% else %}
+                            <a class="dropdown-item" href="{{path('admin')}}">Administration</a>
+                        {% endif %}
+                        
+                        <a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        all_users:
+            chain:
+                providers: ['users_from_database', 'admins_from_database']
+        users_from_database:
+            entity:
+                class: App\Entity\User
+                property: email
+        admins_from_database:
+            entity:
+                class: App\Entity\Admin
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
+        users_secured_domain:
+            anonymous: true
+            provider: users_from_database
+            logout:
+                path: /logout
+                target: /
+            form_login: 
+                login_path: login
+                check_path: login
+            
+        admins_secured_domain:
+            anonymous: true
+            provider: admins_from_database
+            logout:
+                path: /logout
+                target: /
+            form_login: 
+                login_path: panel
+                check_path: panel
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER }
+    encoders:
+        # App\Entity\User: plaintext
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+        App\Entity\Admin:
+            algorithm: bcrypt
+            cost: 12

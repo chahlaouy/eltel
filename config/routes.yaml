@@ -1,0 +1,10 @@
+logout:
+    path: /logout
+# admin_login:
+#     path: /admini
+#     controller: App\Controller\HomeControllerController::adminLogin
+
+#index:
+#    path: /
+#   controller: App\Controller\DefaultController::index
+

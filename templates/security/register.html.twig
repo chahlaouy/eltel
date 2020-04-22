@@ -1,0 +1,249 @@
+{% extends "layouts/base.html.twig" %}
+{% block body %}
+    <div class="container my-5">
+        <div class="row my-5">
+            <div class="col-4">
+                <h3 class="text-center gray-700 mb-5">
+                    Votre 08 en trois étape
+                </h3>
+                <div class="d-flex align-items-center my-3">
+                    <div>
+                        <i class="fas fa-chevron-circle-right fa-3x blue-400 mr-4"></i>
+                        {# <i class="fas fa-hand-point-right fa-2x blue-400"></i> #}
+                    </div>
+                    <div>
+                        Choisissez un 08 et ouvrez votre compte
+                    </div>
+                </div>
+                <div class="d-flex align-items-center my-3">
+                    <div>
+                        <i class="fas fa-chevron-circle-right fa-3x blue-400 mr-4"></i>
+                        {# <i class="fas fa-hand-point-right fa-2x blue-400"></i> #}
+                    </div>
+                    <div>
+                        Vérifiez le compte avec une pièce d'identité
+                    </div>
+                </div>
+                <div class="d-flex align-items-center my-3">
+                    <div>
+                        <i class="fas fa-chevron-circle-right fa-3x blue-400 mr-4"></i>
+                        {# <i class="fas fa-hand-point-right fa-2x blue-400"></i> #}
+                    </div>
+                    <div>
+                        Configurez votre 08
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 gray-700">
+                {% if errors is defined %}
+                    {% for error in errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error.message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <h1 class="orange-400">Nouveau Numéro Audiotel en 08</h1>
+                <p class="my-3">Ouvrez votre compte sur VotreNumeroSurtaxe.fr pour obtenir un ou plusieurs numéros surtaxés en 08.</p>
+                <h6 class="orange-400 my-3">Remplissez le formulaire pour vous inscrire</h6>
+
+                <h2 class="blue-500">Choix du numéro</h2>
+                <form name="registration" method="post">
+
+                    <!-- Start Radion Buttons -->
+                        <div class="form">
+                            <h5>Type de numéro 08 <span class="orange-500">*</span> </h5>
+
+                            {% for type in types %}
+                                <div class="inputGroup">
+                                    <input id="type-numero{{type.id}}" name="type-numero" type="radio" value="{{type.id}}"/>
+                                    <label for="type-numero{{type.id}}" 
+                                    {% if type.type == 'A la Minute' %}
+                                        id="btn-minute"
+                                    {% elseif type.type == "A l' appel" %}
+                                        id="btn-app"
+                                    {% endif %}
+                                    
+                                    
+                                    >{{type.type}}</label>
+                                </div>
+
+                                <div class="row" 
+                                    {% if type.type == 'A la Minute' %}
+                                        id="p-minute"
+                                    {% elseif type.type == "A l' appel" %}
+                                        id="p-app"
+                                    {% endif %}
+                                >
+
+                                    <h5 class="ml-4">Palier tarifaire </h5>
+                                    {% for palier in type.paliers %}
+
+                                        <div class="col-10">
+                                            <div class="inputGroup">
+                                                <input id="p-{{palier.id}}" name="palier" type="radio" value="{{palier.id}}"/>
+                                                <label for="p-{{palier.id}}">{{palier.palier}}
+                                                {% if type.type == 'A la Minute' %}
+                                                    €/min
+
+                                                {% else %}
+                                                    €/appel
+                                                {% endif %}
+                                                
+                                                </label>
+                                            </div>
+                                        </div>
+                            
+                                    {% endfor %}
+
+
+                                </div>
+
+                            {% endfor %}
+                            
+                        </div>
+                    <!-- End Radion Buttons -->
+                    <h2 class="blue-500">Informations de compte</h2>
+                    <div class="form-group">
+                        <label for="registration_username" class="required">Nom d'utilisateur <span class="orange-500">*</span></label>
+                        <input type="text" id="registration_username" name="username" required="required" maxlength="255" placeholder="Nom d'utilisateur" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_email" class="required">Votre email <span class="orange-500">*</span></label>
+                        <input type="email" id="registration_email" name="email" required="required" maxlength="255" placeholder="Votre email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_password" class="required">Mot de passe <span class="orange-500">*</span> </label>
+                        <input type="password" id="registration_password" name="password" required="required" placeholder="Mot de passe" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_confirmPaswword" class="required">Confirmer votre mot de passe <span class="orange-500">*</span></label>
+                        <input type="password" id="registration_confirmPaswword" name="confirm-password" required="required" placeholder="Confirmer votre mot de passe" class="form-control">
+                    </div>
+
+                    <div class="form-group mt-5">
+                        <label for="registration_confirmPaswword" class="required">Société <span class="orange-500">*</span> </label>
+                        <input type="text" id="registration_confirmPaswword" name="societe" required="required" placeholder="Société" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_confirmPaswword" class="required">SIREN <span class="orange-500">*</span> </label>
+                        <input type="text" id="registration_confirmPaswword" name="siren" required="required" placeholder="SIREN" class="form-control">
+                    </div>
+                    <div class="form-group mt-5">
+                        <label for="registration_confirmPaswword" class="required">Adresse <span class="orange-500">*</span> </label>
+                        <input type="text" id="registration_confirmPaswword" name="adresse" required="required" placeholder="Adresse" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_confirmPaswword" class="required">Code Postal <span class="orange-500">*</span> </label>
+                        <input type="number" id="registration_confirmPaswword" name="cp" required="required" placeholder="Code Postal" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="registration_confirmPaswword" class="required">Ville <span class="orange-500">*</span> </label>
+                        <input type="text" id="registration_confirmPaswword" name="ville" required="required" placeholder="Ville" class="form-control">
+                    </div>
+                    <div class="form-group mt-5">
+                        <label for="registration_confirmPaswword" class="required">Téléphone portable <span class="orange-500">*</span> </label>
+                        <input type="number" id="registration_confirmPaswword" name="tel" required="required" placeholder="Téléphone portable" class="form-control">
+                    </div>
+
+
+                    <input type="submit" class="btn bg-orange-400 gray-100" style="width: 100%" value="Inscription">
+                        
+                    <input type="hidden" id="registration__token" name="registration[_token]" value="ZGNbT_vnwJtjshG-79RnIO18a4ZQmhCx01PvbbmJP4A">
+                    
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+			
+{% endblock %}
+
+{# <div class="row" id="p-minute">
+<h5 class="ml-4">Palier tarifaire </h5>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-minute-1" name="p-minute" type="radio" value="0.80"/>
+<label for="p-minute-1">0.80€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-minute-2" name="p-minute" type="radio"/>
+<label for="p-minute-2">0.70€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-minute-3" name="p-minute" type="radio"/>
+<label for="p-minute-3">0.60€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-minute-4" name="p-minute" type="radio"/>
+<label for="p-minute-4">0.50€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-minute-5" name="p-minute" type="radio"/>
+<label for="p-minute-5">0.40€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-minute-6" name="p-minute" type="radio"/>
+<label for="p-minute-6">0.30€/min</label>
+</div>
+</div>
+
+
+</div> #}
+
+{# <div class="inputGroup">
+<input id="t-appel-ap" name="t-appel" type="radio"/>
+<label for="t-appel-ap" id="btn-app">A la lappel</label>
+</div> #}
+
+{# <div class="row" id="p-app">
+<h5 class="ml-4">Palier tarifaire </h5>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-ap-1" name="p-ap" type="radio"/>
+<label for="p-ap-1">3.0€/appel</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-ap-2" name="p-ap" type="radio"/>
+<label for="p-ap-2">2.99€/appel</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-ap-3" name="p-ap" type="radio"/>
+<label for="p-ap-3">2.55€/appel</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-ap-4" name="p-ap" type="radio"/>
+<label for="p-ap-4">2.00€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-ap-5" name="p-ap" type="radio"/>
+<label for="p-ap-5">1.99€/min</label>
+</div>
+</div>
+<div class="col-10">
+<div class="inputGroup">
+<input id="p-ap-6" name="p-ap" type="radio"/>
+<label for="p-ap-6">1.50€/min</label>
+</div>
+</div>
+
+
+</div> #}

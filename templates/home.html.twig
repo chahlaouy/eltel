@@ -1,0 +1,99 @@
+{% extends "layouts/base.html.twig" %}
+{% block title %}ELETEL|Acceuil{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active slide-1">
+                    <div class="overlay"></div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-blue text-3xl">Numéro surtaxé en 08</h1>
+                        <p>Assistance technique, Mise en relation,
+                            Voyance, Service avant-vente,
+                            Accès à du contenu ou à un service, ...
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item slide-2">
+                    <div class="overlay"></div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-blue text-3xl">Numéro surtaxé en 08</h1>
+                        <p>Assistance technique, Mise en relation,
+                            Voyance, Service avant-vente,
+                            Accès à du contenu ou à un service, ...
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item slide-3">
+                    <div class="overlay"></div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-blue text-3xl">Numéro surtaxé en 08</h1>
+                        <p>Assistance technique, Mise en relation,
+                            Voyance, Service avant-vente,
+                            Accès à du contenu ou à un service, ...
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="container my-5">
+        <h1 class="text-center gray-700">Nos Services</h1>
+        <div class="row mt-5 text-center">
+            <div class="col-4">
+                <div class="card shadow" style="width: 20rem;">
+                    <i class="fas fa-phone-alt orange-500 fa-5x my-4"></i>
+                    <div class="card-body">
+                        <h5 class="card-title text-xl gray-700">Votre Numéro en 08</h5>
+                        <p class="card-text">Attribué immédiatement après l'inscription </p>
+                        <a href="#" class="btn btn-primary">Ouvrir un compte</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div class="card shadow" style="width: 20rem;">
+                    <i class="fas fa-euro-sign orange-500 fa-5x my-4"></i>
+                    <div class="card-body">
+                        <h5 class="card-title text-xl gray-700">Nombreux paliers tarifaires</h5>
+                        <p class="card-text">
+                            De 0.15€/min à 0.80€/min
+                            De 0.99€/appel à 3.00€/appel</p>
+                        <a href="#" class="btn btn-primary">Réversement</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 d-flex align-items-center justify-content-center">
+                <i class="fas fa-gift fa-3x orange-400"></i>
+                <h3 class="gray-700 py-3 mb-0 ml-2">Abonnement Offerte</h3>
+            </div>
+            <div class="col-4 d-flex align-items-center justify-content-center">
+                <i class="fas fa-unlock-alt fa-3x orange-400"></i>
+                <h3 class="gray-700 py-3 mb-0 ml-2">Sans Engagement</h3>
+            </div>
+            <div class="col-4 d-flex align-items-center justify-content-center">
+                <i class="fas fa-user-clock fa-3x orange-400"></i>
+                <h3 class="gray-700 py-3 mb-0 ml-2">Mise En Route Immédiate</h3>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

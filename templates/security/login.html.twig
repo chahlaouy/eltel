@@ -1,0 +1,88 @@
+{% extends "layouts/base.html.twig" %}
+{% block title %}
+    clients
+{% endblock %}
+{% block body %}
+
+    
+    {% if error %}
+        <div class="alert alert-danger">
+            {{error.messageKey}}
+        </div>
+    {% endif %}
+    {# <div class="container mt-5">
+        <form action="{{path('login')}}" method="post">
+            <div class="form-group" method="post">
+                <label for="name">Username</label>
+                <input type="text" id="_username" name="_username" class="form-control" value="{{last_name}}" >
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="_password" class="form-control" >
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">se connecter</button>
+            </div>
+        </form>
+    </div> #}
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                
+                    <div class="login-logo"></div>
+                        <div class="card mt-5">
+                        <div class="card-body login-card-body">
+                        <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
+
+                        <form action="{{path('login')}}" method="post">
+                            <div class="input-group mb-3">
+                            <input type="email" id="_username" name="_username" class="form-control" placeholder="Email" value="{{last_name}}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="input-group mb-3">
+                            <input type="password" id="password" name="_password" class="form-control" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Rappelez Moi
+                                </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">connexion</button>
+                            </div>
+                            <!-- /.col -->
+                            </div>
+                        </form>
+
+                        <p class="mb-1">
+                            <a href="forgot-password.html">j'ai oublié mon mot de passe</a>
+                        </p>
+                        <p class="mb-0">
+                            <a href="register.html" class="text-center">Enregistrer une nouvelle adhésion</a>
+                        </p>
+                        </div>
+                        <!-- /.login-card-body -->
+                    </div>
+                
+            </div>
+            <div class="col-3"></div>        
+        </div>
+    </div>
+{% endblock %}

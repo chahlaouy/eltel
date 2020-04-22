@@ -1,0 +1,45 @@
+
+{% include "layouts/upperbar.html.twig" %}
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{{path('home')}}">
+            <img src="img/logo_2.png" style="
+                width: 150px;
+            " alt="">
+        </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item {% if home is defined and home == 'active' %}active-menu{% endif %}
+                ">
+                    <a class="nav-link" href="{{path('home')}}">Acceuil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('offre')}}">Offre <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Reversement <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ouvrir un Compte <span class="sr-only">(current)</span></a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Typologie</a>
+                    <div class="dropdown-menu shadow" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="#">Annuaires(mise en relation)</a>
+                        <a class="dropdown-item" href="#">Relation client/Hotline</a>
+                        <a class="dropdown-item" href="#">Consulting</a>
+                        <a class="dropdown-item" href="#">Voyance</a>
+                        <a class="dropdown-item" href="#">Adulte</a>
+                    </div>
+                </li>
+            </ul>
+            
+        </div>
+
+    </div>
+</nav>
