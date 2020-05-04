@@ -1,0 +1,153 @@
+{% extends "admin/layouts/base.html.twig" %}
+{% block body %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+  <form action="{{path('affect.number', {id: client.id})}}" method="POST">
+  {# <input type="text" class="hidden" value="{{client.id}}" name="client-id"> #}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Affecter Numero</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="numero">Numéro Surtaxé</label>
+            <input type="number" class="form-control" id="numero" placeholder="Numero Surtaxe" name="numero">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="typologie">Typologie</label>
+            <select id="typologie" class="form-control" name="typologie">
+                <option selected>choisissez</option>
+                <option value="Annuaires(mise en relation)">Annuaires(mise en relation)</option>
+                <option value="Relation client/Hotline">Relation client/Hotline</option>
+                <option value="Consulting">Consulting</option>
+                <option value="Voyance">Voyance</option>
+                <option value="Adulte">Adulte</option>
+            </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-10">
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn btn-block btn-success btn-xs my-4" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Affecter Numéro</button>
+    </div>
+    <div class="col-12">
+        {% if client.numeroSurtaxes != NULL %}
+            <h1>liste des Numeros</h1>
+            <table class="table table-striped my-5 table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Typologie</th>
+                        <th scope="col">Consommation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for numero in client.numeroSurtaxes %}
+            
+                        <tr>
+                            <th scope="row">{{numero.id}}</th>
+                            <td>{{numero.numero}}</td>
+                            <td>{{numero.typologie}}</td>
+                            <td>{{numero.consommation}}</td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% endif %}
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">{{client.id}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">Email</th>
+                <td>{{client.email}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Nom</th>
+                <td>{{client.username}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Type Numero</th>
+                <td>{{client.typNumero.type}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Palier</th>
+                <td>{{client.palier.palier}}
+                    {% if client.typNumero.type == 'A la Minute' %}
+                        €/min
+                    {% else %}
+                        €/appel
+                    {% endif %}
+                </td>
+                </tr>
+                <tr>
+                <th scope="row">Societe</th>
+                <td>{{client.societe}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Siren</th>
+                <td>{{client.siren}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Adresse</th>
+                <td>{{client.adresse}}</td>
+                </tr>
+                <tr>
+                <th scope="row">CP</th>
+                <td>{{client.cp}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Ville</th>
+                <td>{{client.ville}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Téléphone</th>
+                <td>{{client.phone}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Editer</th>
+                <td> 
+                    <a href="">
+                        Editer<i class="fas fa-edit"></i>
+                    </a></td>
+                </tr>
+                <tr>
+                <th scope="row">Supprimer</th>
+                <td> 
+                    <a href="">
+                       Supprimer<i class="fas fa-trash-alt"></i>
+                    </a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,8 +1,74 @@
 {% extends 'user/layouts/base.html.twig' %}
 
-{% block title %}User Panel{% endblock %}
+{% block title %}Mon espace{% endblock %}
 
 {% block body %}
-<h1>user Panel</h1>
+
+    {% if app.user.verified is same as(false) %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    {% if app.user.userIdentity == NULL %}
+                        
+                            <div class="callout callout-warning">
+                                <h5>Il vous reste q'une derniere etape</h5>
+
+                                <p>verifié votre compte</p>
+                                {{form_start(form)}}
+                                {{form_row(form.imageFile)}}
+                                <button class="btn btn-success">Verifié</button>
+                                {{form_end(form)}}
+                            
+                            </div>
+                    
+                    {% else %}
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-check"></i> Success</h5>
+                            Votre Demande est en cours de traitement
+                        </div>
+                    {% endif %}
+                </div> 
+                <div class="col-2"></div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <h2>liste des Numeros</h2>
+            <table class="table table-striped my-5">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Consommation</th>
+                        <th scope="col">Montant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for numero in app.user.numeroSurtaxes %}
+            
+                        <tr>
+                            <th scope="row">{{numero.id}}</th>
+                            <td>{{numero.numero}}</td>
+                            <td>
+                                {{numero.consommation}} /
+                                {% if numero.user.typNumero.type == 'A la Minute' %}
+                                    Min
+                                {% else %}
+                                    App
+                                {% endif %}
+                            </td>
+                            <td>{{numero.consommation * numero.user.palier.palier}}€</td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% endif %}
+    
 </div>
 {% endblock %}

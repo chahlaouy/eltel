@@ -61,34 +61,16 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{path('espace')}}" class="nav-link {% if dashboard is defined and dashboard == 'active' %}active{% endif %}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Mon espace
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-inbox"></i>
-              <p>
-                Demande
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{path('clients')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Clients
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{path('reversement')}}" class="nav-link {% if reverse is defined and reverse == 'active' %}active{% endif %}">
               <i class="nav-icon fas fa-coins"></i>
               <p>
                 Révérsement
@@ -96,17 +78,9 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tasks"></i>
-              <p>
-                Typologie
-              </p>
-            </a>
-          </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{path('profile')}}" class="nav-link {% if profil is defined and profil == 'active' %}active{% endif %}">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile
@@ -153,12 +127,12 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      +216 56 128 454
+      <i class="fas fa-phone-volume"></i> +339 745 964 30 - <i class="fas fa-phone-volume"></i> +336 056 723 37
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2020-2021 <a href="https://ELTEL.com">ELTEL.com</a>.</strong> All rights reserved.
   </footer>
 </div>
-    <script src="build/app.js" type="text/javascript"></script>
+    <script src="{{asset('build/app.js')}}" type="text/javascript"></script>
 </body>
 </html>

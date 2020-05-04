@@ -1,0 +1,91 @@
+{% extends "admin/layouts/base.html.twig" %}
+
+{% block body %}
+    <div class="container gray-700">
+        <h3>Liste Des Demandes</h3>
+    </div>
+	<div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+            	<h3 class="card-title">Liste Des Demandes</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+            <table class="table table-bordered">
+                <thead>                  
+                	<tr>
+						<th>id</th>
+						<th>Numero</th>
+						<th>Client</th>
+						<th>Consommation</th>
+						<th>Montant</th>
+						<th>Modifier Consommation</th>
+                    </tr>
+                </thead>
+                <tbody>
+					{% for numero in numeros %}
+                    	<tr>
+							<td>{{numero.id}}</td>
+							<td>{{numero.numero}}</td>
+							<td>{{numero.user.userName}}</td>
+							<td>
+                                {{numero.consommation}} /
+                                {% if numero.user.typNumero.type == 'A la Minute' %}
+                                    Min
+                                {% else %}
+                                    App
+                                {% endif %}
+                            </td>
+							<td>{{numero.consommation * numero.user.palier.palier}}€</td>
+							<td>
+
+                                <div class="modal fade" id="exampleModal{{numero.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                    <form action="{{path('change.consommation', {id: numero.id})}}" method="POST">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Affecter Numero</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="consommation">Nouvel Consommation</label>
+                                                <input type="number" class="form-control" id="consommation" placeholder="Numero Surtaxe" name="consommation" value="{{numero.consommation}}">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+
+                                <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal{{numero.id}}"><i class="fas fa-edit blue-500"></i> Modifier</button>
+                            
+                            </td>
+                    	</tr>
+					{% endfor %}
+                    
+                </tbody>
+            </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+					<li class="page-item"><a class="page-link" href="#">«</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+{% endblock %}
+  

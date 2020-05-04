@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -163,6 +165,21 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="boolean")
      */
     private $verified;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Identity", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $userIdentity;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\NumeroSurtaxe", mappedBy="user")
+     */
+    private $numeroSurtaxes;
+
+    public function __construct()
+    {
+        $this->numeroSurtaxes = new ArrayCollection();
+    }
 
     public function getRoles(): array
     {
@@ -336,6 +353,55 @@ class User implements UserInterface,\Serializable
     public function setVerified(bool $verified): self
     {
         $this->verified = $verified;
+
+        return $this;
+    }
+
+    public function getUserIdentity(): ?Identity
+    {
+        return $this->userIdentity;
+    }
+
+    public function setUserIdentity(?Identity $userIdentity): self
+    {
+        $this->userIdentity = $userIdentity;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = null === $userIdentity ? null : $this;
+        if ($userIdentity->getUser() !== $newUser) {
+            $userIdentity->setUser($newUser);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|NumeroSurtaxe[]
+     */
+    public function getNumeroSurtaxes(): Collection
+    {
+        return $this->numeroSurtaxes;
+    }
+
+    public function addNumeroSurtax(NumeroSurtaxe $numeroSurtax): self
+    {
+        if (!$this->numeroSurtaxes->contains($numeroSurtax)) {
+            $this->numeroSurtaxes[] = $numeroSurtax;
+            $numeroSurtax->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNumeroSurtax(NumeroSurtaxe $numeroSurtax): self
+    {
+        if ($this->numeroSurtaxes->contains($numeroSurtax)) {
+            $this->numeroSurtaxes->removeElement($numeroSurtax);
+            // set the owning side to null (unless already changed)
+            if ($numeroSurtax->getUser() === $this) {
+                $numeroSurtax->setUser(null);
+            }
+        }
 
         return $this;
     }

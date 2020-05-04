@@ -1,0 +1,109 @@
+{% extends "admin/layouts/base.html.twig" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">{{client.id}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">Email</th>
+                <td>{{client.email}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Nom</th>
+                <td>{{client.username}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Type Numero</th>
+                <td>{{client.typNumero.type}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Palier</th>
+                <td>{{client.palier.palier}}
+                    {% if client.typNumero.type == 'A la Minute' %}
+                        €/min
+                    {% else %}
+                        €/appel
+                    {% endif %}
+                </td>
+                </tr>
+                <tr>
+                <th scope="row">Societe</th>
+                <td>{{client.societe}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Siren</th>
+                <td>{{client.siren}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Adresse</th>
+                <td>{{client.adresse}}</td>
+                </tr>
+                <tr>
+                <th scope="row">CP</th>
+                <td>{{client.cp}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Ville</th>
+                <td>{{client.ville}}</td>
+                </tr>
+                <tr>
+                <th scope="row">Téléphone</th>
+                <td>{{client.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    {% if client.userIdentity != NULL %}
+        <div class="col-2"></div>
+        <div class="col-8 text-center mt-4">
+        
+            <h1>Piece D'identite</h1>
+            
+            
+            <div class="card mt-4" style="width: 100%">
+                <img src="{{asset('images/users/identities')}}/{{client.userIdentity.identity}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{client.userName}}</h5>
+                    <p class="card-text">date d'upload: {{client.userIdentity.updatedAt|date("m/d/Y")}} </p>
+                    <a href="{{path('valid.account', {id: client.id})}}" class="btn btn-primary">Valider Le Compte</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-2"></div>
+    {% endif %}
+</div>
+{% endblock %}
+{#
+<th>Nom</th>
+<th>Email</th>
+<th>Type Numero</th>
+<th>Palier</th>
+<th>societe</th>
+<th>siren</th>
+<th>adresse</th>
+<th>cp</th>
+<th>ville</th>
+<th>phone</th>
+<th>Supprimer</th>
+
+<td>{{client.username}}</td>
+<td>{{client.email}}</td>
+<td>{{client.typNumero.type}}</td>
+<td>{{client.palier.palier}}</td>
+<td>{{client.societe}}</td>
+<td>{{client.siren}}</td>
+<td>{{client.adresse}}</td>
+<td>{{client.cp}}</td>
+<td>{{client.ville}}</td>
+<td>{{client.phone}}</td>
+#}

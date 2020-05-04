@@ -1,5 +1,5 @@
-logout:
-    path: /logout
+# logout:
+#     path: /logout
 # admin_login:
 #     path: /admini
 #     controller: App\Controller\HomeControllerController::adminLogin

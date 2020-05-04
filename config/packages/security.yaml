@@ -18,17 +18,8 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
             
-        users_secured_domain:
-            anonymous: true
-            provider: users_from_database
-            logout:
-                path: /logout
-                target: /
-            form_login: 
-                login_path: login
-                check_path: login
-            
         admins_secured_domain:
+            pattern: ^/panel
             anonymous: true
             provider: admins_from_database
             logout:
@@ -37,6 +28,20 @@ security:
             form_login: 
                 login_path: panel
                 check_path: panel
+                default_target_path: dashboard
+
+        users_secured_domain:
+            pattern: ^/
+            anonymous: true
+            provider: users_from_database
+            logout:
+                path: /logout
+                target: /
+            form_login: 
+                login_path: login
+                check_path: login
+                default_target_path: espace
+            
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

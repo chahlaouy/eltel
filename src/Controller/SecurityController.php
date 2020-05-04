@@ -98,6 +98,13 @@ class SecurityController extends AbstractController{
             'types' => $types
         ]);
     }
+    /**
+    * @Route("/logout", name="logout")
+    */
+    public function logout(){
+
+        return $this->redirectToRoute('home');
+    }
 }
 /*
                 * Uses a __toString method on the $errors variable which is a
